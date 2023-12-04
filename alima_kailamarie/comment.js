@@ -34,3 +34,26 @@ commentInput.value = '';
 commentButton.disabled = true;
 });
 });
+
+$("#searchBtn").click(function() {
+    let country = $("#countrySearch").val();
+    let region = "";
+
+$.getJSON("https://restcountries.com/v3.1/name/" + country, function(data) {
+    $("#countryDetails").html("<h2>" + data.name.common + "</h2><p>Capital: " 
+        + data.capital + "</p><p>Population: " + data.population + "</p>");
+        region = data.region;
+});
+
+$.getJSON("https://restcountries.com/v3.1/region/" + region, function(data) {
+    let relatedCountriesHTML = "<h3>Other countries in " + region + 
+        ":</h3><ul>";
+
+    for (let i = 0; i < data.length; i++) {
+        relatedCountriesHTML += "<li>" + data[i].name.common + "</li>";
+    }
+    
+    relatedCountriesHTML += "</ul>";
+    $("#relatedCountries").html(relatedCountriesHTML);
+    });
+});
