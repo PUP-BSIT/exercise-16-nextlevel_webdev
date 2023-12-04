@@ -36,35 +36,37 @@ commentButton.disabled = true;
 });
 
 async function searchCountry() {
-const countryInput = document.getElementById('countryInput').value;
+const countryName = document.getElementById('country-name').value;
+const response = await 
+    axios.get(`https://restcountries.com/v3.1/name/${countryName}`);
     
-const countryResponse = await 
-    fetch(`https://restcountries.com/v3.1/name/${countryInput}`);
-const countryData = await countryResponse.json();
-    
-if (countryData.length > 0) {
-    const countryDetails = document.getElementById('countryDetails');
-    countryDetails.innerHTML = `<h2>${countryData[0].name.common}</h2>
-                                <p>Region: ${countryData[0].region}</p>
-                                <p>Capital: ${countryData[0].capital}</p>
-                                <p>Population: ${countryData[0].population}</p>
-                                <p>Area: ${countryData[0].area} sq km</p>
-                                <p>Language: ${Object.values(countryData[0]
-                                    .languages).join(', ')}</p>`;
-        
-const regionResponse = await 
-    fetch(`https://restcountries.com/v3.1/region/${countryData[0].region}`);
-const regionData = await regionResponse.json();
-        
-const countriesInRegion = document.getElementById('countriesInRegion');
-countriesInRegion.innerHTML = '<h2>Other Countries in the Same Region</h2>';
-        
-regionData.forEach(country => {
-    if (country.name.common !== countryData[0].name.common) {
-        countriesInRegion.innerHTML += `<p>${country.name.common}</p>`;
-    }
-});
+if (response.data.length > 0) {
+    const country = response.data[0];
+    const countryInfo = `
+        <h2>${country.name.common}</h2>
+        <p>Capital: ${country.capital[0]}</p>
+        <p>Population: ${country.population}</p>
+        <p>Area: ${country.area}</p>
+        <p>Timezones: ${country.timezones.join(', ')}</p>
+        `;
+
+const region = country.region;
+const similarCountries = await 
+    axios.get(`https://restcountries.com/v3.1/region/${region}`);
+
+const similarCountriesList = `
+    <h3>Countries in the same region</h3>
+        <ul>
+        ${similarCountries.data.map(country => `<li>
+            ${country.name.common}</li>`).join('')}
+        </ul>
+        `;
+
+document.getElementById('country-info').innerHTML = countryInfo;
+document.getElementById('similar-countries').innerHTML = similarCountriesList;
     } else {
-        alert('Country not found. Please enter a valid country name.');
+        document.getElementById('country-info').innerHTML = 
+            '<p>No country found</p>';
+        document.getElementById('similar-countries').innerHTML = '';
+      }
     }
-}

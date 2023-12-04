@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alima Kaila Marie Page</title></head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+        </script>
 <body>
     <header>
         <h1>Alima Kaila Marie</h1>
@@ -97,12 +99,14 @@
 
     <div class="countries" id="countries_of_the_world">
         <h1>Countries of the World</h1>
-        <label for="countryInput">Enter Country:</label>
-        <input type="text" id="countryInput" placeholder="Enter a country">
-        <button type="search" id="search_country">Search</button>
-
-        <div id="countryDetails"></div>
-        <div id="countriesInRegion"></div>
+        <div>
+        <label for="country-name">Search Country:</label>
+        <input type="text" id="country-name" name="country-name">
+        <button onclick="searchCountry()">Search</button>
+        </div>
+        
+        <div id="country-info"></div>
+        <div id="similar-countries"></div>
     </div>
     <script src="comment.js"></script>
 </body>
