@@ -97,13 +97,13 @@
 
     <div class="countries" id="countries_of_the_world">
         <h1>Countries of the World</h1>
-        <input type="text" id="countrySearch" 
-            placeholder="Search for a country...">
-        <button id="searchBtn">Search</button>
+        <label for="countryInput">Enter Country:</label>
+        <input type="text" id="countryInput" placeholder="Enter a country">
+        <button onclick="searchCountry()">Search</button>
+
         <div id="countryDetails"></div>
-        <div id="relatedCountries"></div>
+        <div id="countriesInRegion"></div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/comment/3.5.1/
-        comment.min.js"></script>
+    <script src="comment.js"></script>
 </body>
 </html>
