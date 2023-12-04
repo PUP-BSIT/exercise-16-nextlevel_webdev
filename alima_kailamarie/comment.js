@@ -61,7 +61,7 @@ countriesInRegion.innerHTML = '<h2>Other Countries in the Same Region</h2>';
         
 regionData.forEach(country => {
     if (country.name.common !== countryData[0].name.common) {
-        countriesInRegion.innerHTML += <p>${country.name.common}</p>;
+        countriesInRegion.innerHTML += `<p>${country.name.common}</p>`;
     }
 });
     } else {
