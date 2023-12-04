@@ -13,7 +13,7 @@ function updateCommentButton() {
     const comment = get('comment').value;
     const comment_button = get('comment_button');
     
-    comment_button.disabled = full_name.trim() === ''|| comment.trim() === '';
+    comment_button.disabled = full_name.trim() || comment.trim();
 }
 
 function addComment() {
