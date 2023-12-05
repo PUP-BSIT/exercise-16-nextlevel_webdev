@@ -31,18 +31,20 @@ function sortComments(event) {
     const commentList = document.getElementById('comment_list');
     const comments = Array.from(commentList.children);
 
-    comments.sort((a, b) => {
+    comments.sort(function(a, b) {
         const timestampA = parseInt(a.getAttribute('data-timestamp'));
         const timestampB = parseInt(b.getAttribute('data-timestamp'));
-
-        if (event.target.id === 'sort_asc') {
+    
+        if (event.target.id == 'sort_asc') {
             return timestampA - timestampB;
         } else {
             return timestampB - timestampA;
         }
     });
-
-    comments.forEach(comment => commentList.appendChild(comment));
+    
+    comments.forEach(function(comment) {
+        commentList.appendChild(comment);
+    });
 }
 
 document.getElementById('sort_asc').addEventListener('click', sortComments);

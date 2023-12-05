@@ -38,8 +38,10 @@ function displayComments() {
     const date = new Date().toLocaleString();
     const comment = comments[comments.length - 1];
     const li = document.createElement('li');
+
     li.className = 'comment';
     li.dataset.date = date;  
     li.textContent = `${comment.text} - ${date}`;
+    
     commentsContainer.appendChild(li);
 }
