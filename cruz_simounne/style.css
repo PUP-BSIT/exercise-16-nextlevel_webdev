@@ -45,3 +45,13 @@ img {
     border: 8px solid #7a5c58;
     border-radius: 5px;
 }
+
+#comments {
+    list-style: none;
+    padding: 0;
+}
+.comment {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 10px;
+}
