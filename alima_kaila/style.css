@@ -158,3 +158,32 @@ li {
     margin-bottom: 5px;
     font-family: 'Arial', sans-serif;
 }
+
+.comment-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.button-container {
+    margin-top: 10px;
+    text-align: center;
+}
+.comment-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.country-btn {
+    padding: 20px 30px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.country-btn:hover {
+    background-color: #45a049;
+}

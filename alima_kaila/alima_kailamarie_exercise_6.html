@@ -83,17 +83,35 @@
             <p><strong>Simounne</strong>: I hope that you'll achieve your 
                 goals!</p>
         </div>
-        <form id="comment_form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-            <br>
-            <label for="comment">Comment:</label>
-            <textarea id="comment" required></textarea>
-            <br>
-            <button type="submit" id="comment_button">Comment</button>
-        </form>
-        <div id="comment_Display"></div>
+        <div class="comment-section">
+            <form id="comment_form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" required></textarea>
+
+                <button id="comment_button" type="submit" 
+                    disabled>Comment</button>
+            </form>
+
+            <button id="sort_asc" type="button">Sort Ascending</button>
+            <button id="sort_desc" type="button">Sort Descending</button>
+        </div>
     </div>
+    
+    <div class="content">
+        <h2>Comments</h2>
+        <ul id="comment_list"></ul>
+    </div>
+
+    <div class="content">
+        <a href="./countries/countries.html">
+            <button type="button" class="country-btn">
+                Countries of the World
+            </button>
+        </a>
+        </div>
     
     <script src="comment.js"></script>
 </body>

@@ -1,121 +1,49 @@
-const get = (id) => document.getElementById(id);
-const val = (id) => get(id).value.trim();
-const createComment = (full_name, comment) => {
-    const newComment = document.createElement('div');
-    newComment.classList.add('comment');
-    newComment.innerHTML = `<p><strong>${full_name}: </strong>${comment}</p>`;
-    newComment.dataset.date = new Date().toISOString();
-    return newComment;
-};
-
-function updateCommentButton() {
-    const full_name = get('full_name').value;
-    const comment = get('comment').value;
-    const comment_button = get('comment_button');
-    
-    comment_button.disabled = full_name.trim() || comment.trim();
+function enableCommentButton() {
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+    document.getElementById('comment_button').disabled = 
+        !(name && comment);
 }
 
-function addComment() {
-    const full_name = get('full_name').value;
-    const comment = get('comment').value;
-    const commentContainer = get('comments_container');
-    const newComment = createComment(full_name, comment);
-    commentContainer.prepend(newComment);
-    get('full_name').value = '';
-    get('comment').value = '';
-}
+document.getElementById('comment_form').addEventListener('input', 
+    enableCommentButton);
 
-function sortComments(order) {
-    const commentContainer = get('comments_container');
-    const comments = Array.from(commentContainer.children);
-
-    comments.sort(function(a, b) {
-        const dateA = new Date(a.dataset.date);
-        const dateB = new Date(b.dataset.date);
-
-        return order === 'asc' ? dateA - dateB : dateB - dateA;
-    });
-
-    commentContainer.innerHTML = '';
-    comments.forEach(function(comment) {
-        commentContainer.appendChild(comment);
-    });
-}
-
-get('comment_form').addEventListener('input', updateCommentButton);
-
-get('comment_form').addEventListener('submit', function(event) {
+function addComment(event) {
     event.preventDefault();
-    addComment();
-    updateCommentButton();
-    sortComments('asc');
-});
 
-get('sort_asc_button').addEventListener('click', function() {
-    sortComments('asc');
-});
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+    const timestamp = new Date().getTime();
+    const commentList = document.getElementById('comment_list');
 
-get('sort_desc_button').addEventListener('click', function() {
-    sortComments('desc');
-const get = (id) => document.getElementById(id);
-const val = (id) => get(id).value.trim();
-const createComment = (full_name, comment) => {
-    const newComment = document.createElement('div');
-    newComment.classList.add('comment');
-    newComment.innerHTML = `<p><strong>${full_name}: </strong>${comment}</p>`;
-    newComment.dataset.date = new Date().toISOString();
-    return newComment;
-};
+    const listItem = document.createElement('li');
+    listItem.setAttribute('data-timestamp', timestamp);
+    listItem.textContent = `Name: ${name}, Comment: ${comment}`;
+    commentList.appendChild(listItem);
 
-function updateCommentButton() {
-    const full_name = get('full_name').value;
-    const comment = get('comment').value;
-    const comment_button = get('comment_button');
-    
-    comment_button.disabled = full_name.trim() || comment.trim();
-}
+document.getElementById('comment_form').reset();
+    }
 
-function addComment() {
-    const full_name = get('full_name').value;
-    const comment = get('comment').value;
-    const commentContainer = get('comments-container');
-    const newComment = createComment(full_name, comment);
-    commentContainer.prepend(newComment);
-    get('full_name').value = '';
-    get('comment').value = '';
-}
+document.getElementById('comment_form').addEventListener('submit', 
+    addComment);
 
-function sortComments(order) {
-    const commentContainer = get('comments-container');
-    const comments = Array.from(commentContainer.children);
+function sortComments(event) {
+    const commentList = document.getElementById('comment_list');
+    const comments = Array.from(commentList.children);
 
-    comments.sort(function(a, b) {
-        const dateA = new Date(a.dataset.date);
-        const dateB = new Date(b.dataset.date);
+    comments.sort((a, b) => {
+        const timestampA = parseInt(a.getAttribute('data-timestamp'));
+        const timestampB = parseInt(b.getAttribute('data-timestamp'));
 
-        return order === 'asc' ? dateA - dateB : dateB - dateA;
+        if (event.target.id === 'sort_asc') {
+            return timestampA - timestampB;
+        } else {
+            return timestampB - timestampA;
+        }
     });
 
-    commentContainer.innerHTML = '';
-    comments.forEach(function(comment) {
-        commentContainer.appendChild(comment);
-    });
+    comments.forEach(comment => commentList.appendChild(comment));
 }
 
-get('comment_form').addEventListener('input', updateCommentButton);
-
-get('comment_form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    addComment();
-    updateCommentButton();
-    sortComments('asc');
-});
-
-get('sort_asc_button').addEventListener('click', function() {
-    sortComments('asc');
-});
-
-get('sort_desc_button').addEventListener('click', function() {
-    sortComments('desc');
-});
+document.getElementById('sort_asc').addEventListener('click', sortComments);
+document.getElementById('sort_desc').addEventListener('click', sortComments);
