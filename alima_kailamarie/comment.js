@@ -59,3 +59,4 @@ get('sort_asc_button').addEventListener('click', function() {
 get('sort_desc_button').addEventListener('click', function() {
     sortComments('desc');
 });
+
