@@ -27,7 +27,8 @@ async function searchCountry() {
                 
     regionData.forEach(function(country) {
         if (country.name.common !== countryData[0].name.common) {
-            countriesInRegion.innerHTML += '<p>' + country.name.common + '</p>';
+            countriesInRegion.innerHTML += '<p>' + country.name.common + 
+                '</p>';
         }
     });
         
