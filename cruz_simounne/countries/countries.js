@@ -19,10 +19,11 @@ async function searchCountry() {
     
     const similarCountriesList = `
         <h3>Countries in the same region</h3>
-            <ul>
-            ${similarCountries.data.map(country => `<li>
-                ${country.name.common}</li>`).join('')}
-            </ul>
+        <ul>
+            ${similarCountries.data.map(function(country) {
+                return `<li>${country.name.common}</li>`;
+            }).join('')}
+        </ul>
             `;
 
         document.getElementById('country-info').innerHTML = countryInfo;
